@@ -17,7 +17,6 @@
       </div>
     </div>
 
-
     <footer class="pfooter">
       <div class="cart">
         <strong>数量:</strong>
@@ -36,7 +35,7 @@
 </template>
 
 <script>
-  import storage from '../model/storage.js';
+  import storage from '../model/storage.js'
 	export default {
 		name: "Pcontent",
     data(){
@@ -50,14 +49,14 @@
     },
     methods:{
 		  requestData(){
-		    var id =this.$route.query.id;
+		    var id =this.$route.query.id
         this.$axios.get('/productcontent?id='+id)
           .then(res=>{
-           this.list=res.data.result[0];
+           this.list=res.data.result[0]
 
           })
           .catch(err=>{
-            console.log(err);
+            console.log(err)
           })
       },
       addNum(){
@@ -69,7 +68,7 @@
         }
       },
       addCart(){
-        var uid=storage.get('roomid');
+        var uid=storage.get('roomid')
 		    this.$axios.post('/addcart',{
 		      uid:uid,
           title:this.list.title,
@@ -79,12 +78,12 @@
           img_url:this.list.img_url
         }).then(res=>{
           if(res.data.success){
-            this.$socket.emit('addcart', 'addcart');
+            this.$socket.emit('addcart', 'addcart')
             this.$router.push({path:'home'})
           }
         })
           .catch(err=>{
-            console.log(err);
+            console.log(err)
           })
       }
     }
@@ -92,7 +91,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .back{
+  .back {
     height: 3.8rem;
     line-height: 3.8rem;
     width: 3.8rem;
@@ -102,7 +101,7 @@
     top: .5rem;
     left: .5rem;
     color: #fff;
-    &:before{
+    &:before {
       content: "";
       display: block;
       width: .8rem;
@@ -117,44 +116,43 @@
       margin-right: .4rem;
     }
   }
-  .p_content{
-    .p_info{
+  .p_content {
+    .p_info {
       background: #fff;
-      img{
+      img {
         width: 100%;
         height: 18rem
       }
-      h2{
+      h2 {
         padding: .2rem .5rem;
       }
-      .price{
+      .price {
         padding: .2rem .5rem;
         color: #ff4d54;
       }
     }
-    .p_detial{
+    .p_detial {
       background: #fff;
       margin-top: 1rem;
-      h3{
+      h3 {
         padding: .5rem;
       }
-      .p_content{
+      .p_content {
         padding: 1rem;
-        img{
+        img {
           max-width: 100%;
           display: block;
           margin: 0 auto;
         }
-        *{
+        * {
           line-height: 1.5;
           color: #666;
         }
       }
     }
   }
-
   /*底部*/
-  .pfooter{
+  .pfooter {
     position: fixed;
     bottom: 0px;
     height: 4.4rem;
@@ -163,19 +161,19 @@
     left: 0px;
     width: 100%;
     border-top: 1px solid #eee;
-    .cart{
+    .cart {
       float: left;
       display:flex;
-      strong{
+      strong {
         flex: 1;
         font-size: 1.6rem;
         padding: 0rem .5rem;
       }
-      .cart_num{
+      .cart_num {
         width: 10rem;
         display: flex;
         margin-top: .8rem;
-        .input_left,.input_right{
+        .input_left,.input_right {
           flex: 1;
           width: 2.8rem;
           height: 2.8rem;
@@ -185,9 +183,9 @@
           border: 1px solid #eee;
           font-size: 2.4rem;
         }
-        .input_center{
+        .input_center {
           flex: 1;
-          input{
+          input {
             width: 2rem;
             text-align: center;
             width: 100%;
@@ -200,7 +198,7 @@
         }
       }
     }
-    .addcart{
+    .addcart {
       float: right;
       background: #ff6771;
       color: #fff;
@@ -211,10 +209,9 @@
       margin-top: .8rem;
       margin-right: .5rem;
     }
-    a{
+    a {
       color:#ffffff;
       text-decoration: none;
     }
   }
-
 </style>

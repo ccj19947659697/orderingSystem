@@ -32,7 +32,7 @@
 </template>
 
 <script>
-  import storage from '../model/storage.js';
+  import storage from '../model/storage.js'
 	export default {
 		name: "Start",
     data(){
@@ -50,43 +50,40 @@
         this.userList.push(i+1+'人')
       }
       this.$nextTick(function () {
-        this.addChangeEnvet();
+        this.addChangeEnvet()
       })
     },
     methods:{
 		  addChangeEnvet(){
-		    var that=this;
+		    var that=this
         //人数的dom操作
 		    var userLis=document.querySelectorAll('.user_list li');
 		    for(var i=0;i<userLis.length;i++){
           userLis[i].onclick=function(){
 		        for(var j=0;j<userLis.length;j++){
-              userLis[j].className='';
+              userLis[j].className=''
             }
-		        this.className='active';
-		        that.p_num=this.querySelector('span').innerHTML.trim();
-
+		        this.className='active'
+		        that.p_num=this.querySelector('span').innerHTML.trim()
           }
         }
 
         //口味偏好的dom操作
-        var markLis=document.querySelectorAll('.mark_list li');
+        var markLis=document.querySelectorAll('.mark_list li')
 
 		    for(var i=0;i<markLis.length;i++){
           markLis[i].onclick=function(){
-
             for(var j=0;j<markLis.length;j++){
-              markLis[j].className='';
+              markLis[j].className=''
             }
-            this.className='active';   //this 就是li这个dom节点
-            that.p_mark= that.p_mark+' '+this.querySelector('span').innerHTML.trim();
+            this.className='active'  //this 就是li这个dom节点
+            that.p_mark= that.p_mark+' '+this.querySelector('span').innerHTML.trim()
           }
-
         }
       },
       //添加备注信息和用餐人数
       addPeopleInfo(){
-        var uid=storage.get('roomid');
+        var uid=storage.get('roomid')
            this.$axios.post('/addPeopleInfo',{
              uid:uid,
              p_num:this.p_num,
@@ -96,16 +93,16 @@
               this.$router.push({path:'home'})
             }
           }).catch(err=>{
-              console.log(err);
+              console.log(err)
            })
-      }
+		  }
     }
 	}
 </script>
 
 <style lang="scss" scoped>
-  .start_content{
-    .start_header{
+  .start_content {
+    .start_header {
       height: 3.2rem;
       line-height: 3.2rem;
       background: #000;
@@ -115,7 +112,7 @@
       display: flex;
       justify-content: space-around;
       border-radius: .5rem;
-      img{
+      img {
         height:2.2rem;
         line-height: 2.2rem;
         position: relative;
@@ -123,30 +120,30 @@
         margin-left: 1rem;
       }
     }
-    .notice{
+    .notice {
       color: #ff3e3f;
       text-align: center;
       margin:1rem 0rem;
     }
-    .mark_input{
+    .mark_input {
       padding:1rem;
-      input{
+      input {
         height:2.5rem;
         line-height: 2.5rem;
         width:100%;
         border: 1px solid rgba(192, 236, 255, 0.94);
       }
     }
-    .user_list,.mark_list{
+    .user_list,.mark_list {
       display: flex;
       flex-wrap: wrap;
       padding: .5rem;
       justify-content: space-around;
-      li{
+      li {
         width: 25%;
         padding: .5rem;
         box-sizing: border-box;
-        span{
+        span {
           display: block;
           width: 100%;
           height: 3.2rem;
@@ -157,8 +154,8 @@
           border: 1px solid #ccc;
         }
       }
-      li.active{
-        span{
+      li.active {
+        span {
           background-color: #ff1c43;
           border:1px solid #ffffff;
           color: rgba(13, 13, 13, 0.99);
@@ -166,7 +163,7 @@
       }
     }
   }
-  .start{
+  .start {
     position: fixed;
     bottom: 5rem;
     left: 50%;

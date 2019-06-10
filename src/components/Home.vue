@@ -32,10 +32,9 @@
 
 <script>
   //引入公共组件
-  import NavFooter from './pulic/NavFooter.vue';
-  //引入配置文件
-  import Config from '../model/config.js';
-  import storage from '../model/storage.js';
+  import NavFooter from './pulic/NavFooter.vue'
+  import Config from '../model/config.js'
+  import storage from '../model/storage.js'
 	export default {
 		name: "Home",
     data(){
@@ -49,29 +48,29 @@
         connect: function () {
       },
         addcart: function (data) {  /*接受广播来的数据，将购物车数据更新*/
-           this.getCartCount();
+           this.getCartCount()
       }
     },
     mounted() {
-      this.requestData();
-      this.getCartCount();
+      this.requestData()
+      this.getCartCount()
     },
     methods:{
       requestData(){
 		    this.$axios.get('/productlist')
           .then(res=>{
-		      console.log(res);
-		      this.list=res.data.result.splice(0,5);
+		      console.log(res)
+		      this.list=res.data.result.splice(0,5)
         })
           .catch(err=>{
-            console.log(err);
+            console.log(err)
           })
       },
       getCartCount(){
-		    var uid=storage.get('roomid');
+		    var uid=storage.get('roomid')
 		    this.$axios.get(`/cartCount?uid=${uid}`)
           .then(res=>{
-            this.cartNum=res.data.result;
+            this.cartNum=res.data.result
           })
           .catch(err=>{
             console.log(err)
@@ -86,35 +85,35 @@
 
 <style lang="scss" scoped>
   /*列表*/
-  .item{
-    .item_cate{
+  .item {
+    .item_cate {
       text-align: center;
       padding: .5rem;
     }
-    .item_list{
+    .item_list {
       display: flex;
       flex-wrap: wrap;
       padding: 0px .5rem;
-      li{
+      li {
         width: 33.3%;
         padding: .5rem;
         box-sizing: border-box;
         text-decoration: none;
         color: black;
-        .inner{
+        .inner {
           background: #fff;
           width: 100%;
           border-radius: .5rem;
           overflow: hidden;
-          a{
+          a {
             color: #666;
             text-decoration: none;
           }
-          img{
+          img {
             width: 100%;
             height:9rem;
           }
-          p{
+          p {
             padding: .2rem .5rem;
           }
           .title{

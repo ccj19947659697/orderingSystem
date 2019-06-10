@@ -4,6 +4,7 @@
       <img src="../../assets/images/navigation.png"/>
       <p>导航</p>
     </div>
+
     <div class="footer_nav_show" v-if="flag">
       <ul class="list">
         <router-link to="/home" tag="li">

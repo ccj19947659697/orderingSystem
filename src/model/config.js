@@ -1,5 +1,4 @@
   var config={
     api:'http://a.itying.com/'
   }
-
-  export default config;
+  export default config

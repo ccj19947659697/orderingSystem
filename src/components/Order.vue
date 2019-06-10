@@ -42,12 +42,11 @@
      </router-link>
    </div>
  </div>
-
 </template>
 
 <script>
-  import NavFooter from './pulic/NavFooter';
-  import storage from '../model/storage.js';
+  import NavFooter from './pulic/NavFooter'
+  import storage from '../model/storage.js'
 	export default {
 		name: "Order",
     data(){
@@ -61,18 +60,18 @@
     },
     methods:{
 		  getOrder(){
-        var uid=storage.get('roomid');
+        var uid=storage.get('roomid')
         this.id=uid;
         this.$axios.get(`/getOrder?uid=${uid}`)
           .then(res=>{
-            this.list=res.data.result[0];
+            this.list=res.data.result[0]
           })
           .catch(err=>{
             console.log(err)
           })
 		  },
       doPay(){
-        var uid=storage.get('roomid');
+        var uid=storage.get('roomid')
         this.$axios.post('/doPay',{
           uid,
           total_price:this.list.total_price,
@@ -87,8 +86,8 @@
           })
       },
       doWeixinPay() {
-        var order_id = this.list.order_id;
-        location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7bf3787c783116e4&redirect_uri=http://b.itying.com?order_id=' + order_id + '&response_type=code&scope=snsapi_base#wechat_redirect';
+        var order_id = this.list.order_id
+        location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7bf3787c783116e4&redirect_uri=http://b.itying.com?order_id=' + order_id + '&response_type=code&scope=snsapi_base#wechat_redirect'
       }
     },
     components:{
@@ -98,92 +97,90 @@
 </script>
 
 <style lang="scss" scoped>
-  .order_content{
+  .order_content {
     padding: 1rem;
-    .order_info{
+    .order_info {
       background: #fff;
       border-radius: .5rem;
-      .order_top{
+      .order_top {
         display: flex;
-        img{
+        img {
           width: 5.6rem;
           height: 5.6rem;
         }
-        .order_info_right{
+        .order_info_right {
           flex: 1;
           padding-top: .5rem;
         }
       }
-      h3{
+      h3 {
         line-height: 2;
         padding: .5rem;
-        .price{
+        .price {
           font-size: 2rem;
           color: red;
         }
       }
     }
-
     //  订单列表
-    .order_list{
+    .order_list {
       background: #FFFFFF;
       border-radius: .5rem;
       margin-top: 1rem;
       padding: .5rem;
-      h3{
+      h3 {
         line-height: 2;
       }
-      .list{
-        li{
+      .list {
+        li {
           display: flex;
           line-height: 2;
           padding: .5rem 0rem;
-          .title{
+          .title {
             flex: 2;
           }
-          .num{
+          .num {
             flex: 1;
             text-align: center;
           }
-          .price{
+          .price {
             flex: 1;
             text-align: center;
           }
         }
       }
     }
-
     /*支付页面*/
-    .order_pay{
+    .order_pay {
       background: #fff;
       border-radius: .5rem;
-      h3{
+      h3 {
         padding:2rem 0rem .5rem 0rem;
         font-size: 2rem;
         text-align: center;
       }
-      .order_pay_detail{
+      .order_pay_detail {
         display: flex;
         line-height: 2;
         border-bottom: 1px solid #eee;
         padding: .5rem;
-        .d_num,.p_num,.order_time{
+        .d_num,.p_num,.order_time {
           flex:1;
         }
       }
-      .order_pay_info{
+      .order_pay_info {
         line-height: 2;
         display: flex;
         margin: 1rem 0rem;
         padding: .5rem .5rem 1rem .5rem;
-        .price_list{
+        .price_list {
           flex: 1;
-          .price{
+          .price {
             font-size: 2rem;
             color: red;
           }
         }
-        .pay_button{
+        .pay_button {
           width: 10rem;
           border-radius: .5rem;
           background: red;
