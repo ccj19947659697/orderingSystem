@@ -15,8 +15,8 @@ const router = new VueRouter({
            {path:'/cart',component:Cart},
            {path:'/order',component:Order},
            {path:'/editpeopleinfo',component:EditPeopleInfo},
-           {path:'/success',component:Success},
-  ]
+           {path:'/success',component:Success}
+           ]
 })
 
 export default router
