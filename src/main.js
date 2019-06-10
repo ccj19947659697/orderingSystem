@@ -27,7 +27,6 @@ Vue.use(new VueSocketIO({
   connection: `http://a.itying.com?roomid={roomid}`,
 }));
 
-
 new Vue({
   el: '#app',
   render: h => h(App),
