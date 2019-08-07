@@ -83,12 +83,12 @@
   import storage from '../model/storage.js'
 	export default {
 		name: "Cart",
-    data(){
-		  return{
-        list:[],
-        allPrice:0,
-        totalNum:0,
-        peopleList:[]
+    data () {
+		  return {
+        list: [],
+        allPrice: 0,
+        totalNum: 0,
+        peopleList: []
       }
     },
     sockets: {
@@ -96,87 +96,87 @@
         this.getCartData()
       }
     },
-    mounted(){
+    mounted () {
 		  this.getCartData()
 		  this.getPeopleInfoList()
     },
-    methods:{
+    methods: {
 		  //获取菜单列表信息
-		  getCartData(){
-        var uid=storage.get('roomid')
+		  getCartData () {
+        var uid = storage.get('roomid')
 		    this.$axios.get(`/cartlist?uid=${uid}`)
-          .then(res=>{
+          .then(res => {
             console.log(res.data)
             this.list=res.data.result
             this.getTotalResult()
           })
-          .catch(err=>{
+          .catch(err => {
 		        console.log(err)
           })
       },
       //减少
-      deNum(item,i){
-        var product_id=item.product_id
-        var num=item.num
-        var uid=storage.get('roomid')
+      deNum (item,i) {
+        var product_id = item.product_id
+        var num = item.num
+        var uid = storage.get('roomid')
         this.$axios.get(`/decCart?uid=${uid}&product_id=${product_id}&num=${num}`)
-          .then(res=>{
+          .then(res => {
             this.$socket.emit('addcart','addcart')
             this.getTotalResult()
           })
-          .catch(err=>{
+          .catch(err => {
             console.log(err)
           })
-		    if(item.num===1){
+		    if (item.num === 1) {
           this.list.splice(i,1)
-        }else{
+        } else {
 		      --item.num
         }
       },
       //增加
-      addNum(item){
-		    var product_id=item.product_id
-		    var num=item.num
-        var uid=storage.get('roomid')
+      addNum (item) {
+		    var product_id = item.product_id
+		    var num = item.num
+        var uid = storage.get('roomid')
 		    this.$axios.get(`/incCart?uid=${uid}&product_id=${product_id}&num=${num}`)
-          .then(res=>{
+          .then(res => {
             this.$socket.emit('addcart', 'addcart')
             this.getTotalResult()
           })
-          .catch(err=>{
+          .catch(err => {
             console.log(err)
           });
            ++item.num
       },
       //计算总价和数量
-      getTotalResult(){
-        var allPrice=0
-        var totalNum=0
-        for(var i =0;i<this.list.length;i++){
-          allPrice+=parseFloat(this.list[i].price*this.list[i].num)
-          totalNum+=this.list[i].num
+      getTotalResult () {
+        var allPrice = 0
+        var totalNum = 0
+        for (var i =0; i<this.list.length; i++) {
+          allPrice += parseFloat(this.list[i].price*this.list[i].num)
+          totalNum += this.list[i].num
         }
-        this.allPrice=allPrice
-        this.totalNum=totalNum
+        this.allPrice = allPrice
+        this.totalNum = totalNum
       },
       //获取用餐人数和备注信息
-      getPeopleInfoList(){
-        var uid=storage.get('roomid')
+      getPeopleInfoList () {
+        var uid = storage.get('roomid')
         this.$axios.get(`/peopleInfoList?uid=${uid}`)
-          .then(res=>{
-            this.peopleList=res.data.result[0]
+          .then(res => {
+            this.peopleList = res.data.result[0]
           })
-          .catch(err=>{
+          .catch(err => {
             console.log(err)
           })
       },
-      addOrder(){
-        var uid=storage.get('roomid')
-        var p_num= this.peopleList.p_num
-        var p_mark= this.peopleList.p_mark
-        var total_price=this.allPrice
-        var total_num=this.totalNum
-        var order=JSON.stringify(this.list) /*数组   把json对象转化成json字符串*/
+      addOrder () {
+        var uid = storage.get('roomid')
+        var p_num = this.peopleList.p_num
+        var p_mark = this.peopleList.p_mark
+        var total_price = this.allPrice
+        var total_num = this.totalNum
+        var order = JSON.stringify(this.list) /*数组   把json对象转化成json字符串*/
         this.$axios.post('/addOrder',{
           uid,
           p_num,
@@ -185,19 +185,19 @@
           total_num,
           order
         })
-          .then(res=>{
-            if(res.data.success){
+          .then(res => {
+            if (res.data.success) {
               this.$router.push({ path: 'order' })
             }
         })
-          .catch(err=>{
+          .catch(err => {
             console.log(err)
           })
 		  }
 
     },
     components:{
-		  'v-footer':NavFooter
+		  'v-footer': NavFooter
     }
 	}
 </script>
