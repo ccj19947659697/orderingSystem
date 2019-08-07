@@ -5,7 +5,7 @@
         <h2>购物车</h2>
         <div class="p_number">
           <div class="p_number_left">
-            <p>用餐人数:{{peopleList.p_num}}</p>
+            <p>用餐人数:{{ peopleList.p_num }}</p>
             <p>备注:<span v-if="!peopleList.p_mark">无</span>{{ peopleList.p_mark }}</p>
           </div>
           <div class="p_number_right">
