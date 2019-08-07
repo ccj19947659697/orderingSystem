@@ -14,11 +14,11 @@ import Axios from 'axios'
 //设置请求根路径
 Axios.defaults.baseURL = 'http://a.itying.com/api'
 //给Vue原型挂载一个属性
-Vue.prototype.$axios =Axios
+Vue.prototype.$axios = Axios
 
 //获取url传来的桌号,保存到localstorage中
-var roomid=window.location.hash.split('=')[1]
-storage.set('roomid',roomid)
+var roomid = window.location.hash.split('=')[1]
+storage.set('roomid', roomid)
 
 //导入vue-socket.io
 import VueSocketIO from 'vue-socket.io'
