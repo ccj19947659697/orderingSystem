@@ -37,13 +37,13 @@
 </template>
 
 <script>
-  export default{
-      data(){
+  export default {
+      data () {
             return {
               msg: 'Welcome to Your Vue.js App'
             }
         },
-        mounted(){
+        mounted () {
             console.log(this.$route.query);
         }
       }
