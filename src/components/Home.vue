@@ -37,11 +37,11 @@
   import storage from '../model/storage.js'
 	export default {
 		name: "Home",
-    data(){
-		  return{
-		    api:Config.api,
-		    list:[],
-        cartNum:0
+    data () {
+		  return {
+		    api: Config.api,
+		    list: [],
+        cartNum: 0
       }
     },
     sockets: {
@@ -51,34 +51,34 @@
            this.getCartCount()
       }
     },
-    mounted() {
+    mounted () {
       this.requestData()
       this.getCartCount()
     },
-    methods:{
-      requestData(){
+    methods: {
+      requestData () {
 		    this.$axios.get('/productlist')
-          .then(res=>{
+          .then(res => {
 		      console.log(res)
-		      this.list=res.data.result.splice(0,5)
+		      this.list = res.data.result.splice(0,5)
         })
-          .catch(err=>{
+          .catch(err => {
             console.log(err)
           })
       },
-      getCartCount(){
-		    var uid=storage.get('roomid')
+      getCartCount () {
+		    var uid = storage.get('roomid')
 		    this.$axios.get(`/cartCount?uid=${uid}`)
-          .then(res=>{
-            this.cartNum=res.data.result
+          .then(res => {
+            this.cartNum = res.data.result
           })
-          .catch(err=>{
+          .catch(err => {
             console.log(err)
           })
       }
     },
-    components:{
-    'v-navfooter':NavFooter
+    components: {
+    'v-navfooter': NavFooter
     }
   }
 </script>
