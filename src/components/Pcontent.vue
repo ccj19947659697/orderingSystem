@@ -38,37 +38,37 @@
   import storage from '../model/storage.js'
 	export default {
 		name: "Pcontent",
-    data(){
-		  return{
-        list:[],
-        num:1
+    data () {
+		  return {
+        list: [],
+        num: 1
       }
     },
-    mounted() {
+    mounted () {
 		  this.requestData()
     },
-    methods:{
-		  requestData(){
-		    var id =this.$route.query.id
+    methods: {
+		  requestData () {
+		    var id = this.$route.query.id
         this.$axios.get('/productcontent?id='+id)
-          .then(res=>{
-           this.list=res.data.result[0]
+          .then(res => {
+           this.list = res.data.result[0]
 
           })
-          .catch(err=>{
+          .catch(err => {
             console.log(err)
           })
       },
-      addNum(){
+      addNum () {
 		    ++this.num
       },
-      deNum(){
-		    if(this.num>=1){
+      deNum () {
+		    if(this.num >= 1){
           --this.num
         }
       },
-      addCart(){
-        var uid=storage.get('roomid')
+      addCart () {
+        var uid = storage.get('roomid')
 		    this.$axios.post('/addcart',{
 		      uid:uid,
           title:this.list.title,
@@ -76,13 +76,13 @@
           num:this.num,
           product_id:this.list._id,
           img_url:this.list.img_url
-        }).then(res=>{
+        }).then(res => {
           if(res.data.success){
             this.$socket.emit('addcart', 'addcart')
             this.$router.push({path:'home'})
           }
         })
-          .catch(err=>{
+          .catch(err => {
             console.log(err)
           })
       }
