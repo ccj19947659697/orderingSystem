@@ -37,78 +37,78 @@
   import storage from '../model/storage.js'
 	export default {
 		name: "Start",
-    data(){
-		  return{
-        p_num:'1人',
-        p_mark:'',
-        peopleList:[],
-        userList:[]
+    data () {
+		  return {
+        p_num: '1人',
+        p_mark: '',
+        peopleList: [],
+        userList: []
       }
     },
-    mounted(){
+    mounted () {
 		  this.getPeopleInfoList();
-      for(var i=0;i<12;i++){
+      for (var i=0; i<12; i++) {
         this.userList.push(i+1+'人')
       }
       this.$nextTick(function () {
         this.addChangeEnvet();
       })
     },
-    methods:{
-		  addChangeEnvet(){
-		    var that=this
+    methods: {
+		  addChangeEnvet () {
+		    var that = this
         //人数的dom操作
-		    var userLis=document.querySelectorAll('.user_list li')
-		    for(var i=0;i<userLis.length;i++){
-          userLis[i].onclick=function(){
-		        for(var j=0;j<userLis.length;j++){
-              userLis[j].className=''
+		    var userLis = document.querySelectorAll('.user_list li')
+		    for (var i=0; i<userLis.length; i++) {
+          userLis[i].onclick = function () {
+		        for (var j=0; j<userLis.length; j++) {
+              userLis[j].className = ''
             }
-		        this.className='active'
-		        that.p_num=this.querySelector('span').innerHTML.trim()
+		        this.className = 'active'
+		        that.p_num = this.querySelector('span').innerHTML.trim()
           }
         }
 
         //口味偏好的dom操作
-        var markLis=document.querySelectorAll('.mark_list li')
+        var markLis = document.querySelectorAll('.mark_list li')
 
-        for(var i=0;i<markLis.length;i++){
-          markLis[i].onclick=function(){
+        for (var i = 0; i < markLis.length; i++) {
+          markLis[i].onclick = function(){
 
-            for(var j=0;j<markLis.length;j++){
-              markLis[j].className=''
+            for (var j = 0; j < markLis.length; j++) {
+              markLis[j].className = ''
             }
-            this.className='active'   //this 就是li这个dom节点
-            that.p_mark= that.p_mark+' '+this.querySelector('span').innerHTML.trim()
+            this.className = 'active'   //this 就是li这个dom节点
+            that.p_mark = that.p_mark+' '+this.querySelector('span').innerHTML.trim()
           }
 
         }
       },
       //添加备注信息和用餐人数
-      addPeopleInfo(){
-           var uid=storage.get('roomid');
+      addPeopleInfo () {
+           var uid = storage.get('roomid');
            this.$axios.post('/addPeopleInfo',{
-            uid:uid,
-            p_num:this.p_num,
-             p_mark:this.p_mark
-          }).then(res=>{
-            if(res.data.success==="true"){
+            uid: uid,
+            p_num: this.p_num,
+             p_mark: this.p_mark
+          }).then(res => {
+            if (res.data.success === "true") {
               this.$router.push({path:'cart'})
             }
-          }).catch(err=>{
+          }).catch(err => {
               console.log(err)
            })
       },
       //获取用餐人数信息
-     getPeopleInfoList(){
-       var uid=storage.get('roomid')
+     getPeopleInfoList () {
+       var uid = storage.get('roomid')
        this.$axios.get(`/peopleInfoList?uid=${uid}`)
-         .then(res=>{
+         .then(res => {
            console.log(res.data)
-           this.peopleList=res.data.result[0]
-           this.p_mark=this.peopleList.p_mark
+           this.peopleList = res.data.result[0]
+           this.p_mark = this.peopleList.p_mark
       })
-         .catch(err=>{
+         .catch(err => {
            console.log(err)
       })
   }
