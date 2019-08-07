@@ -6,7 +6,7 @@
         <div class="p_number">
           <div class="p_number_left">
             <p>用餐人数:{{peopleList.p_num}}</p>
-            <p>备注:<span v-if="!peopleList.p_mark">无</span>{{peopleList.p_mark}}</p>
+            <p>备注:<span v-if="!peopleList.p_mark">无</span>{{ peopleList.p_mark }}</p>
           </div>
           <div class="p_number_right">
             <router-link to="/editpeopleinfo" tag="li">
@@ -16,24 +16,24 @@
           </div>
         </div>
         <div class="cart_p_num">
-          <p>购物车中总共有{{totalNum}}个菜</p>
-          <p>合计：<span class="price">¥{{allPrice}}</span></p>
+          <p>购物车中总共有{{ totalNum }}个菜</p>
+          <p>合计：<span class="price">¥{{ allPrice }}</span></p>
         </div>
       </div>
 
       <div class="cart_list"  v-if="totalNum">
         <ul>
-          <li class="item" v-for="(item,i) in list">
+          <li class="item" v-for="(item, i) in list">
             <div class="left_food">
-              <img :src="`http://a.itying.com/${item.img_url}`"/>
+              <img :src="`http://a.itying.com/${ item.img_url }`"/>
               <div class="food_info">
-                <p>{{item.title}}</p>
-                <p class="price">¥{{item.price}}</p>
+                <p>{{ item.title }}</p>
+                <p class="price">¥{{ item.price }}</p>
               </div>
             </div>
             <div id="right_cart">
               <div class="cart_num">
-                <div class="input_left" @click="deNum(item,i)">-</div>
+                <div class="input_left" @click="deNum(item, i)">-</div>
                 <div class="input_center">
                   <input type="text"  readonly="readonly" v-model="item.num" name="num" id="num" />
                 </div>
