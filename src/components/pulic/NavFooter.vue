@@ -35,9 +35,9 @@
 <script>
 	export default {
 		name: "NavFooter",
-    data(){
-		  return{
-		    flag:false
+    data () {
+		  return {
+		    flag: false
       }
     }
 	}
