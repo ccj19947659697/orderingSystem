@@ -107,7 +107,7 @@
 		    this.$axios.get(`/cartlist?uid=${uid}`)
           .then(res => {
             console.log(res.data)
-            this.list=res.data.result
+            this.list = res.data.result
             this.getTotalResult()
           })
           .catch(err => {
@@ -115,7 +115,7 @@
           })
       },
       //减少
-      deNum (item,i) {
+      deNum (item, i) {
         var product_id = item.product_id
         var num = item.num
         var uid = storage.get('roomid')
