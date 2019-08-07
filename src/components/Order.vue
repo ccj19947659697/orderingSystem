@@ -49,48 +49,48 @@
   import storage from '../model/storage.js'
 	export default {
 		name: "Order",
-    data(){
-		  return{
-		    list:[],
-        id:''
+    data () {
+		  return {
+		    list: [],
+        id: ''
       }
     },
-    mounted(){
+    mounted () {
 		  this.getOrder()
     },
-    methods:{
-		  getOrder(){
-        var uid=storage.get('roomid')
-        this.id=uid;
+    methods: {
+		  getOrder () {
+        var uid = storage.get('roomid')
+        this.id = uid;
         this.$axios.get(`/getOrder?uid=${uid}`)
-          .then(res=>{
-            this.list=res.data.result[0]
+          .then(res => {
+            this.list = res.data.result[0]
           })
-          .catch(err=>{
+          .catch(err => {
             console.log(err)
           })
 		  },
-      doPay(){
-        var uid=storage.get('roomid')
-        this.$axios.post('/doPay',{
+      doPay () {
+        var uid = storage.get('roomid')
+        this.$axios.post('/doPay', {
           uid,
           total_price:this.list.total_price,
           order_id:this.list.order_id,
           return_url:'http://192.168.3.86:8080/#/success'
-        }).then(res=>{
+        }).then(res => {
           console.log(res);
-          location.href=res.data.result.data;
+          location.href = res.data.result.data;
         })
-          .catch(err=>{
+          .catch(err => {
             console.log(err)
           })
       },
-      doWeixinPay() {
+      doWeixinPay () {
         var order_id = this.list.order_id
         location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7bf3787c783116e4&redirect_uri=http://b.itying.com?order_id=' + order_id + '&response_type=code&scope=snsapi_base#wechat_redirect'
       }
     },
-    components:{
+    components: {
       'v-footer':NavFooter
     }
 	}
